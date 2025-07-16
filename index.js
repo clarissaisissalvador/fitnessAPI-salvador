@@ -20,7 +20,7 @@ const corsOptions = {
     credentials: true,
     optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
+app.use(cors());
 
 //[SECTION] Backend Routes
 app.use("/workouts", workoutRoutes);

@@ -1,21 +1,30 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/User.js');
 const auth = require('../auth.js');
+const bcrypt = require('bcrypt');
 
 const { errorHandler } = auth;
 
 //[SECTION] Controller for User Registration
 module.exports.registerUser = (req, res) => {
+  console.log("Received registration:", req.body);
 
-    let newUser = new User({
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10)
+  let newUser = new User({
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 10)
+  });
+
+  return newUser.save()
+    .then(() => {
+      console.log("User saved successfully");
+      res.status(201).send({ message: "Registered Successfully" });
+    })
+    .catch(error => {
+      console.error("Error saving user:", error);
+      res.status(500).send({ error: "Registration failed. Please try again." });
     });
-
-    return newUser.save()
-    .then((user) => res.status(201).send({ message: "Registered Successfully" }))
-    .catch(error => errorHandler(error, req, res));
 };
+
 
 
 
