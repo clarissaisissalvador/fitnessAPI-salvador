@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+
 const User = require('../models/User.js');
 const auth = require('../auth.js');
 const bcrypt = require('bcrypt');
@@ -46,8 +46,8 @@ module.exports.loginUser = (req, res) => {
         .catch(error => {
       console.error("Error loging in user:", error);
       res.status(500).send({ error: "Login failed. Please try again." });
-};
-
+});
+}
 
 
 //[SECTION] Controller for Retrieving User Details 
@@ -64,4 +64,5 @@ module.exports.getProfile = (req, res) => {
     .catch(error => {
       console.error("Error retrieving user:", error);
       res.status(500).send({ error: "User not found. Please try again." });
+})
 }

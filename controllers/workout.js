@@ -15,6 +15,7 @@ module.exports.addWorkout = (req, res) => {
     .catch(error => {
       console.error("Error adding workout:", error);
       res.status(500).send({ error: "Failed to add workout. Please try again." });
+})
 }
 
 
@@ -26,6 +27,7 @@ module.exports.getMyWorkouts = (req, res) => {
     .catch(error => {
       console.error("Error retrieving workout:", error);
       res.status(500).send({ error: "Failed to retrive workouts. Please try again." });
+})
 }
 
 //[SECTION] Controller for Update Workout
@@ -48,7 +50,7 @@ module.exports.updateWorkout = (req, res) => {
     .catch(error => {
       console.error("Error updating workout:", error);
       res.status(500).send({ error: "Failed to update workout. Please try again." });
-}
+})
 };
 
 
@@ -62,7 +64,7 @@ module.exports.deleteWorkout = (req, res) => {
     .catch(error => {
       console.error("Error deleting workout:", error);
       res.status(500).send({ error: "Failed to delete workout. Please try again." });
-}
+})
 }
 
 
@@ -81,6 +83,6 @@ module.exports.completeWorkoutStatus = (req, res) => {
     .catch(error => {
       console.error("Error updating workout:", error);
       res.status(500).send({ error: "Failed to successfully update workout. Please try again." });
-}
+})
 }
 
