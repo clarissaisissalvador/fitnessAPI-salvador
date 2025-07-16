@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 const corsOptions = {
-    origin: 'https://fitness-app-client-omega-henna.vercel.app',
+    origin: ['https://fitness-app-client-omega-henna.vercel.app'],
     credentials: true,
     optionsSuccessStatus: 200
 };
