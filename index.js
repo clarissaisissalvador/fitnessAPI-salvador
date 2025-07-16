@@ -15,9 +15,8 @@ mongoose.connection.once('open', () => console.log('Now connected to MongoDB Atl
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
 const corsOptions = {
-    origin: ['http://localhost:3000/', 'http://localhost:4000/'],
+    origin: 'https://fitness-app-client-omega-henna.vercel.app/',
     credentials: true,
     optionsSuccessStatus: 200
 };
