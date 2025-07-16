@@ -1,8 +1,6 @@
 const Workout = require('../models/Workout.js');
 const auth = require('../auth.js');
 
-const { errorHandler } = auth;
-
 //[SECTION] Controller for Add Workout
 module.exports.addWorkout = (req, res) => {
 
@@ -14,7 +12,9 @@ module.exports.addWorkout = (req, res) => {
 
     return newWorkout.save()
     .then((workout) => res.status(201).send({workout}))
-    .catch(error => errorHandler(error, req, res)); 
+    .catch(error => {
+      console.error("Error adding workout:", error);
+      res.status(500).send({ error: "Failed to add workout. Please try again." });
 }
 
 
@@ -23,7 +23,9 @@ module.exports.getMyWorkouts = (req, res) => {
 
     return Workout.find({})
     .then(workout => res.status(200).send({ workout }))
-    .catch(error => errorHandler(error, req, res));
+    .catch(error => {
+      console.error("Error retrieving workout:", error);
+      res.status(500).send({ error: "Failed to retrive workouts. Please try again." });
 }
 
 //[SECTION] Controller for Update Workout
@@ -43,7 +45,10 @@ module.exports.updateWorkout = (req, res) => {
             res.status(404).send({ message: 'Workout not found' });
         }
     })
-    .catch(error => errorHandler(error, req, res));
+    .catch(error => {
+      console.error("Error updating workout:", error);
+      res.status(500).send({ error: "Failed to update workout. Please try again." });
+}
 };
 
 
@@ -54,7 +59,10 @@ module.exports.deleteWorkout = (req, res) => {
     .then((deleteStatus) => res.status(200).send({ 
         message: 'Workout deleted successfully'
     }))
-    .catch(error => errorHandler(error, req, res));
+    .catch(error => {
+      console.error("Error deleting workout:", error);
+      res.status(500).send({ error: "Failed to delete workout. Please try again." });
+}
 }
 
 
@@ -70,6 +78,9 @@ module.exports.completeWorkoutStatus = (req, res) => {
         message: 'Workout status updated successfully', 
         updatedWorkout: workout 
     }))
-    .catch(error => errorHandler(error, req, res));
+    .catch(error => {
+      console.error("Error updating workout:", error);
+      res.status(500).send({ error: "Failed to successfully update workout. Please try again." });
+}
 }
 

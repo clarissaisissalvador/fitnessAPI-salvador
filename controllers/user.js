@@ -3,8 +3,6 @@ const User = require('../models/User.js');
 const auth = require('../auth.js');
 const bcrypt = require('bcrypt');
 
-const { errorHandler } = auth;
-
 //[SECTION] Controller for User Registration
 module.exports.registerUser = (req, res) => {
   console.log("Received registration:", req.body);
@@ -20,7 +18,7 @@ module.exports.registerUser = (req, res) => {
       res.status(201).send({ message: "Registered Successfully" });
     })
     .catch(error => {
-      console.error("Error saving user:", error);
+      console.error("Error registering user:", error);
       res.status(500).send({ error: "Registration failed. Please try again." });
     });
 };
@@ -45,7 +43,9 @@ module.exports.loginUser = (req, res) => {
                 }
             }
         })
-        .catch(error => errorHandler(error, req, res));
+        .catch(error => {
+      console.error("Error loging in user:", error);
+      res.status(500).send({ error: "Login failed. Please try again." });
 };
 
 
@@ -61,5 +61,7 @@ module.exports.getProfile = (req, res) => {
         user.password = undefined;
         res.status(200).send({ user: user })
     })
-    .catch(error => errorHandler(error, req, res));
+    .catch(error => {
+      console.error("Error retrieving user:", error);
+      res.status(500).send({ error: "User not found. Please try again." });
 }
